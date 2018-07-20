@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const isEmpty = require('./is-empty');
+import Validator from 'validator';
+import isEmpty from './is-empty';
 
-module.exports = function validateRegisterInput(data) {
+const validateRegisterInput = (data) => {
   let errors = {};
 
   data.name = !isEmpty(data.name) ? data.name : '';
@@ -29,12 +29,12 @@ module.exports = function validateRegisterInput(data) {
     errors.password = 'Password field is required';
   }
 
-  if(Validator.isEmpty(data.password2)){
-    errors.password2 = 'Password confirmation field is required';
-  }
-
   if(!Validator.equals(data.password, data.password2)){
     errors.password2 = 'Passwords must match';
+  }
+  
+  if(Validator.isEmpty(data.password2)){
+    errors.password2 = 'Password confirmation field is required';
   }
 
   if(!Validator.isEmail(data.email)){
@@ -46,3 +46,5 @@ module.exports = function validateRegisterInput(data) {
     isValid: isEmpty(errors)
   };
 };
+
+export default validateRegisterInput;

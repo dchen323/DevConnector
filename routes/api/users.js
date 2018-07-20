@@ -1,16 +1,16 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../../config/key');
-const passport = require('passport');
+import gravatar from 'gravatar';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import getKey from '../../config/key';
+import passport from 'passport';
 
 //Load input validation
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+import validateRegisterInput from '../../validation/register';
+import validateLoginInput from '../../validation/login';
 
-const User = require('../../models/User');
+import User from '../../models/User';
 
 // @route GET api/users/test
 //@desc Tests posts route
@@ -92,7 +92,7 @@ router.post('/login', (req, res) => {
             //create jwt payload
             const payload = { id: user.id, name: user.name, avatar: user.avatar };
             //Sign token
-            jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err,token) => {
+            jwt.sign(payload, getKey("secretOrKey"), { expiresIn: 3600 }, (err,token) => {
               res.json({
                 success: true,
                 token: `Bearer ${token}`
@@ -117,4 +117,4 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
   });
 });
 
-module.exports = router;
+export default router;

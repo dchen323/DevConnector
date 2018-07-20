@@ -1,7 +1,7 @@
-const Validator = require('validator');
-const isEmpty = require('./is-empty');
+import Validator from 'validator';
+import isEmpty from './is-empty';
 
-module.exports = function validateLoginInput(data) {
+const validateLoginInput = (data) => {
   let errors = {};
 
 
@@ -15,7 +15,7 @@ module.exports = function validateLoginInput(data) {
   if(Validator.isEmpty(data.email)){
     errors.email = 'Email field is required';
   }
-  
+
   if(Validator.isEmpty(data.password)){
     errors.password = 'Password field is required';
   }
@@ -26,3 +26,5 @@ module.exports = function validateLoginInput(data) {
     isValid: isEmpty(errors)
   };
 };
+
+export default validateLoginInput;
