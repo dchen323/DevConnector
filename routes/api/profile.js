@@ -71,7 +71,8 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res) => 
               res.status(400).json(errors);
             }
 
-            new Profile(profileFields).save()
+            new Profile(profileFields)
+              .save()
               .then(profile => res.json(profile));
           });
       }
