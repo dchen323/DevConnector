@@ -3,8 +3,9 @@ const router = express.Router();
 import mongoose from 'mongoose';
 import passport from 'passport';
 
-//Load post model
+//Load post and user model
 import Post from '../../models/Post';
+import Profile from '../../models/Profile';
 
 //Load post validation
 import validatePostInput from '../../validation/post';
@@ -53,6 +54,25 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req,res) => 
 
   newPost.save()
     .then(post => res.json(post));
+});
+
+// @route DELETE api/posts/:id
+//@desc Delete Post
+//@access private route
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      Post.findById(req.params.id)
+        .then(post => {
+          if(post.user.toString() !== req.user.id){
+            return res.status(401).json({ notauthorized: 'User not authorized'});
+          }
+
+          //Delete post
+          post.remove().then( () => res.json({ success: true}));
+        })
+        .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
+    });
 });
 
 export default router;
