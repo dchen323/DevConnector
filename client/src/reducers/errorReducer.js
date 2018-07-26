@@ -1,9 +1,6 @@
 import { GET_ERRORS } from '../actions/authActions';
 
-const initalState = {
-  isAuthenticated: false,
-  user: {}
-};
+const initalState = {};
 
 export default (state = initalState, action) => {
   Object.freeze(state);
