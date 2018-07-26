@@ -2,10 +2,10 @@ import axios from 'axios';
 export const GET_ERRORS = 'GET_ERRORS';
 
 //Register User
-export const registerUser = (userData) => dispatch => {
+export const registerUser = (userData, history) => dispatch => {
 
   axios.post('/api/users/register', userData)
-    .then(res => console.log(res) )
+    .then(res => history.push('/login') )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
