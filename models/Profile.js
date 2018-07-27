@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users"
   },
   handle: {
     type: String,
@@ -18,7 +18,7 @@ const ProfileSchema = new Schema({
     type: String
   },
   location: {
-    type: String,
+    type: String
   },
   status: {
     type: String,
@@ -29,7 +29,7 @@ const ProfileSchema = new Schema({
     required: true
   },
   bio: {
-    type: String,
+    type: String
   },
   githubusername: {
     type: String
@@ -52,13 +52,13 @@ const ProfileSchema = new Schema({
         required: true
       },
       to: {
-        type: Date,
+        type: Date
       },
       current: {
         type: Boolean,
         default: false
       },
-      description:{
+      description: {
         type: String
       }
     }
@@ -82,13 +82,13 @@ const ProfileSchema = new Schema({
         required: true
       },
       to: {
-        type: Date,
+        type: Date
       },
       current: {
         type: Boolean,
         default: false
       },
-      description:{
+      description: {
         type: String
       }
     }
@@ -116,4 +116,4 @@ const ProfileSchema = new Schema({
   }
 });
 
-export default mongoose.model('profile', ProfileSchema);
+export default mongoose.model("profile", ProfileSchema);

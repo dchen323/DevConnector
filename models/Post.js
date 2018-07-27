@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 //Create Post Schema
@@ -6,23 +6,23 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users"
   },
   text: {
     type: String,
     required: true
   },
   name: {
-    type: String,
+    type: String
   },
   avatar: {
     type: String
   },
-  likes : [
+  likes: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: "users"
       }
     }
   ],
@@ -30,7 +30,7 @@ const PostSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: "users"
       },
       text: {
         type: String,
@@ -54,4 +54,4 @@ const PostSchema = new Schema({
   }
 });
 
-export default mongoose.model('posts', PostSchema);
+export default mongoose.model("posts", PostSchema);

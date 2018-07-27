@@ -17,4 +17,7 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default connect(
+  null,
+  { getCurrentProfile }
+)(Dashboard);
