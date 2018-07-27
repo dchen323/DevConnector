@@ -1,10 +1,10 @@
-import { GET_ERRORS } from '../actions/authActions';
+import { GET_ERRORS } from "../actions/authActions";
 
 const initalState = {};
 
 export default (state = initalState, action) => {
   Object.freeze(state);
-  switch(action.type){
+  switch (action.type) {
     case GET_ERRORS:
       return action.payload;
     default:

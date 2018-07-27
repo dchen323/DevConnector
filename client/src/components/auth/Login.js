@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
-import { loginUser } from '../../actions/authActions';
-import TextFieldGroup from '../common/TextFieldGroup';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { loginUser } from "../../actions/authActions";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       errors: {}
     };
     this.update = this.update.bind(this);
     this.submit = this.submit.bind(this);
   }
 
-  componentDidMount(){
-    if(this.props.auth.isAuthenticated){
-      this.props.history.push('/dashboard');
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.isAuthenticated){
-      this.props.history.push('/dashboard');
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
 
-    if(nextProps.errors){
-      this.setState({errors: nextProps.errors});
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
   update(e) {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  submit(e){
+  submit(e) {
     e.preventDefault();
     const userData = {
       email: this.state.email,
@@ -54,7 +54,9 @@ class Login extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">Sign in to your DevConnector account</p>
+              <p className="lead text-center">
+                Sign in to your DevConnector account
+              </p>
               <form onSubmit={this.submit}>
                 <TextFieldGroup
                   placeholder="Email Address"
@@ -63,7 +65,7 @@ class Login extends Component {
                   value={this.state.email}
                   onChange={this.update}
                   error={errors.email}
-                  />
+                />
                 <TextFieldGroup
                   placeholder="Password"
                   name="password"
@@ -71,7 +73,7 @@ class Login extends Component {
                   value={this.state.password}
                   onChange={this.update}
                   error={errors.password}
-                  />
+                />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -93,4 +95,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

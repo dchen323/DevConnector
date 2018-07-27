@@ -1,42 +1,42 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import classnames from 'classnames';
-import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
-import TextFieldGroup from '../common/TextFieldGroup';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import TextFieldGroup from "../common/TextFieldGroup";
 
 class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      password2: '',
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
       errors: {}
     };
     this.update = this.update.bind(this);
     this.submit = this.submit.bind(this);
   }
 
-  componentDidMount(){
-    if(this.props.auth.isAuthenticated){
-      this.props.history.push('/dashboard');
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
-      this.setState({errors: nextProps.errors});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
   update(e) {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  submit(e){
+  submit(e) {
     e.preventDefault();
     const newUser = {
       name: this.state.name,
@@ -46,7 +46,6 @@ class Register extends Component {
     };
 
     this.props.registerUser(newUser, this.props.history);
-
   }
 
   render() {
@@ -58,13 +57,15 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Create your DevConnector account</p>
+              <p className="lead text-center">
+                Create your DevConnector account
+              </p>
               <form noValidate onSubmit={this.submit}>
                 <TextFieldGroup
                   placeholder="Name"
                   name="name"
                   value={this.state.name}
-                  onChange ={this.update}
+                  onChange={this.update}
                   error={errors.name}
                 />
                 <TextFieldGroup
@@ -81,7 +82,7 @@ class Register extends Component {
                   name="password"
                   type="password"
                   value={this.state.password}
-                  onChange ={this.update}
+                  onChange={this.update}
                   error={errors.password}
                 />
                 <TextFieldGroup
@@ -89,7 +90,7 @@ class Register extends Component {
                   name="password2"
                   type="password"
                   value={this.state.password2}
-                  onChange ={this.update}
+                  onChange={this.update}
                   error={errors.password2}
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
@@ -108,9 +109,12 @@ Register.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser})(withRouter(Register));
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));

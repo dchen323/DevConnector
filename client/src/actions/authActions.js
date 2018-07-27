@@ -1,15 +1,15 @@
-import axios from 'axios';
-import setAuthToken from '../utils/setAuthToken';
-import jwtDecode from 'jwt-decode';
+import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
+import jwtDecode from "jwt-decode";
 
-export const GET_ERRORS = 'GET_ERRORS';
-export const SET_CURRENT_USER ='SET_CURRENT_USER';
+export const GET_ERRORS = "GET_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 //Register User
 export const registerUser = (userData, history) => dispatch => {
-
-  axios.post('/api/users/register', userData)
-    .then(res => history.push('/login') )
+  axios
+    .post("/api/users/register", userData)
+    .then(res => history.push("/login"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -19,13 +19,14 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 //Login - Get User Token
-export const loginUser = (userData) => dispatch => {
-  axios.post('/api/users/login', userData)
+export const loginUser = userData => dispatch => {
+  axios
+    .post("/api/users/login", userData)
     .then(res => {
       //Save to local storage
       const { token } = res.data;
       //Set token to local storage
-      localStorage.setItem('jwtToken', token);
+      localStorage.setItem("jwtToken", token);
       //Set token to auth header
       setAuthToken(token);
       //Decode token to get user data
@@ -42,18 +43,17 @@ export const loginUser = (userData) => dispatch => {
 };
 
 //Create login user function
-export const setCurrentUser = (decoded) => {
-  return({
+export const setCurrentUser = decoded => {
+  return {
     type: SET_CURRENT_USER,
     payload: decoded
-  });
+  };
 };
-
 
 //Log out user
 export const logoutUser = () => dispatch => {
   //Remove token from local storage
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem("jwtToken");
   //Remove auth header for future request
   setAuthToken(false);
   //Set current user to {} which will set isAuthenticated to false
