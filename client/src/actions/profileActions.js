@@ -2,6 +2,7 @@ import axios from "axios";
 import { SET_CURRENT_USER } from "./authActions";
 
 export const GET_PROFILE = "GET_PROFILE";
+export const GET_PROFILES = "GET_PROFILES";
 export const PROFILE_LOADING = "PROFILE_LOADING";
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_CURRENT_PROFILE = "CLEAR_CURRENT_PROFILE";
@@ -20,6 +21,25 @@ export const getCurrentProfile = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_PROFILE,
+        payload: {}
+      })
+    );
+};
+
+//Get all profiles
+export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/api/profile/all")
+    .then(res =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILES,
         payload: {}
       })
     );
