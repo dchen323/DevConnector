@@ -27,7 +27,7 @@ export default (state = initalState, action) => {
     case GET_PROFILES:
       return {
         ...state,
-        profile: action.payload,
+        profiles: action.payload,
         loading: false
       };
     case CLEAR_CURRENT_PROFILE:
