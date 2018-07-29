@@ -12,11 +12,6 @@ import validateEducationInput from "../../validation/education";
 import Profile from "../../models/Profile";
 import User from "../../models/User";
 
-// @route GET api/profile/test
-//@desc Tests posts route
-//@access public route
-router.get("/test", (req, res) => res.json({ msg: "Profile Works" }));
-
 // @route GET api/profile
 //@desc Get current users profile
 //@access private route
@@ -56,7 +51,7 @@ router.get("/all", (req, res) => {
     .catch(err => res.status(404).json({ profile: "There are no profiles" }));
 });
 
-// @route POST api/handle/:handle
+// @route GET api/profile/handle/:handle
 //@desc Get profile by handle
 //@access public route
 router.get("/handle/:handle", (req, res) => {
@@ -75,7 +70,7 @@ router.get("/handle/:handle", (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
-// @route POST api/profile/user/:user_id
+// @route GET api/profile/user/:user_id
 //@desc Get profile by user ID
 //@access public route
 router.get("/user/:user_id", (req, res) => {
