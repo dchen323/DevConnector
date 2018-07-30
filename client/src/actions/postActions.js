@@ -6,6 +6,7 @@ export const GET_POST = "GET_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
 export const GET_ERRORS = "GET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 //Get Posts
 export const getPosts = () => dispatch => {
@@ -47,6 +48,7 @@ export const getPost = id => dispatch => {
 
 //Add Post
 export const addPost = postData => dispatch => {
+  dispatch(clearErrors());
   axios
     .post("/api/posts", postData)
     .then(res =>
@@ -83,6 +85,7 @@ export const deletePost = id => dispatch => {
 
 //Add Comment
 export const addComment = (postId, commentData) => dispatch => {
+  dispatch(clearErrors());
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
@@ -146,4 +149,9 @@ export const removeLike = id => dispatch => {
 //Set loading state
 export const setPostLoading = () => ({
   type: POST_LOADING
+});
+
+//Clear Errors
+export const clearErrors = () => ({
+  type: CLEAR_ERRORS
 });
