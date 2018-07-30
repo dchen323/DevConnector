@@ -87,6 +87,14 @@ class CreateProfile extends Component {
             error={errors.facebook}
           />
           <InputGroup
+            placeholder="LinkedIn Profile URL"
+            name="linkedin"
+            icon="fab fa-linkedin"
+            value={this.state.linkedin}
+            onChange={this.onChange}
+            error={errors.linkedin}
+          />
+          <InputGroup
             placeholder="YouTube Channel URL"
             name="youtube"
             icon="fab fa-youtube"
@@ -101,14 +109,6 @@ class CreateProfile extends Component {
             value={this.state.instagram}
             onChange={this.onChange}
             error={errors.instagram}
-          />
-          <InputGroup
-            placeholder="Twitter Profile URL"
-            name="twitter"
-            icon="fab fa-twitter"
-            value={this.state.twitter}
-            onChange={this.onChange}
-            error={errors.twitter}
           />
         </div>
       );

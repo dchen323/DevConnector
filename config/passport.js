@@ -1,11 +1,11 @@
 import { Strategy, ExtractJwt } from "passport-jwt";
 import mongoose from "mongoose";
 const User = mongoose.model("users");
-import getKey from "./key";
+const keys = require("./keys");
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = getKey("secretOrKey");
+opts.secretOrKey = keys.secretOrKey;
 
 module.exports = passport => {
   passport.use(
