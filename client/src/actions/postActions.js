@@ -7,6 +7,25 @@ export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
 export const GET_ERRORS = "GET_ERRORS";
 
+//Get Posts
+export const getPosts = () => dispatch => {
+  dispatch(setPostLoading());
+  axios
+    .get("/api/posts")
+    .then(res =>
+      dispatch({
+        type: GET_POSTS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_POSTS,
+        payload: null
+      })
+    );
+};
+
 //Add Post
 export const addPost = postData => dispatch => {
   axios
@@ -24,3 +43,8 @@ export const addPost = postData => dispatch => {
       })
     );
 };
+
+//Set loading state
+export const setPostLoading = () => ({
+  type: POST_LOADING
+});
