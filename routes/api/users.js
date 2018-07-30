@@ -12,11 +12,6 @@ import validateLoginInput from "../../validation/login";
 
 import User from "../../models/User";
 
-// @route GET api/users/test
-//@desc Tests posts route
-//@access public route
-router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
-
 // @route POST api/users/register
 //@desc Register user
 //@access public route

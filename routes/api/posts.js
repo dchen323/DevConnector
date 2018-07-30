@@ -11,11 +11,6 @@ import Profile from "../../models/Profile";
 import validatePostInput from "../../validation/post";
 import validateCommentInput from "../../validation/comment";
 
-// @route GET api/posts/test
-//@desc Tests posts route
-//@access public route
-router.get("/test", (req, res) => res.json({ msg: "Posts Works" }));
-
 // @route GET api/posts
 //@desc Get Post
 //@access public route
