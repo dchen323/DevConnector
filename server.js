@@ -1,10 +1,10 @@
-import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import passport from "passport";
 import users from "./routes/api/users";
 import profile from "./routes/api/profile";
 import posts from "./routes/api/posts";
+const express = require("express");
 const keys = require("./config/keys");
 const path = require("path");
 
