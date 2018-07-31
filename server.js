@@ -2,10 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import passport from "passport";
-const keys = require("./config/keys");
 import users from "./routes/api/users";
 import profile from "./routes/api/profile";
 import posts from "./routes/api/posts";
+const keys = require("./config/keys");
+const path = require("path");
 
 const app = express();
 
@@ -32,6 +33,15 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
+
+//Server static assets if in production
+if (process.env.NODE_ENV === "production") {
+  //Set static folder
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 3001;
 

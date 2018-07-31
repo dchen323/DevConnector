@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import getKey from "../../config/key_dev";
 import PropTypes from "prop-types";
+const secret = require("../../config/keys");
 
 class ProfileGithub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clientId: getKey("clientId"),
-      clientSecret: getKey("clientSecret"),
+      clientId: secret.clientId,
+      clientSecret: secret.clientSecret,
       count: 5,
       sort: "created: asc",
       repos: []
