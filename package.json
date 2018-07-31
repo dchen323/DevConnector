@@ -2,18 +2,20 @@
   "name": "mern-udemy",
   "version": "1.0.0",
   "description": "DevConnector MERN project",
-  "main": "server.js",
+  "main": "./lib/server.js",
   "engines": {
     "node": "8.9.4"
   },
   "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build-babel": "babel -d ./dist ./lib -s",
+    "build": "npm run clean && npm run build-babel",
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server.js --exec babel-node --presets es2015",
+    "start": "npm run build && node ./dist/server.js",
+    "server": "nodemon ./lib/server.js --exec babel-node --presets es2015",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":
-      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +36,9 @@
     "validator": "^10.4.0"
   },
   "babel": {
-    "plugins": ["syntax-dynamic-import"]
+    "plugins": [
+      "syntax-dynamic-import"
+    ]
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
